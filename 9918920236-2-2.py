@@ -38,10 +38,17 @@ def main():
         t = glfw.get_time()
         s1 = np.sin(t)
         s2 = np.cos(t)
-        T = np.array([[s1, 0., 0.],
-                      [0., s2, 0.],
-                      [0., 0., s2]])
-        render(T)
+
+        # Rotate
+        T = np.array([[s2, -s1, 0.],
+                      [s1, s2, 0.],
+                      [0., 0., 1]])
+
+        # Translate by (0.5, 0.0)
+        R = np.array([[1., 0., 0.5],
+                      [0., 1., 0.],
+                      [0., 0., 1.]])
+        render(T @ R)
         glfw.swap_buffers(window)
 
     glfw.terminate()
