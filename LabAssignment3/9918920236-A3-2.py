@@ -65,19 +65,39 @@ def drawFrame():
 
 
 def key_callback(window, key, scancode, action, mods):
-    pass
+
+    if action == glfw.PRESS or action == glfw.REPEAT:
+        if key == glfw.KEY_ESCAPE:
+            glfw.set_window_should_close(window)
+
+
 
 
 def render():
+    # xz_degree = 45.
+    # xy_degree = 36.264
+
+    xz_degree, xy_degree = 45., 36.264
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glEnable(GL_DEPTH_TEST)
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
     glLoadIdentity()
-
     glOrtho(-5, 5, -5, 5, -8, 8)
-    gluLookAt(5, 3, 5, 1, 1, -1, 0, 1, 0)
-    drawFrame()
 
+    #
+    # Number 1
+    glRotatef(-xz_degree, 0., 1., 0.)
+    glRotatef(xy_degree, 1, 1., 0.)
+    glTranslatef(-3., -3., -3.)
+    #
+    # # Number 2
+    # glTranslatef(-3., -3., -3.)
+    # glRotatef(-xz_degree, 0., 1., 0.)
+    # glRotatef(-xy_degree, -1., 1., 1.)
+
+
+    drawFrame()
     glColor3ub(255, 255, 255)
     drawCubeArray()
 
@@ -85,7 +105,7 @@ def render():
 def main():
     if not glfw.init():
         return
-    window = glfw.create_window(640, 640, "3D Trans", None, None)
+    window = glfw.create_window(640, 640, "9918920236-A3-2", None, None)
     if not window:
         glfw.terminate()
         return
@@ -103,3 +123,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+main()
